@@ -9,7 +9,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     
     - name: Setup Android NDK
       uses: nttld/setup-ndk@v1
@@ -21,8 +21,8 @@ jobs:
         export ANDROID_NDK_HOME=${{ github.workspace }}/android-ndk
         $ANDROID_NDK_HOME/ndk-build
       
-    - name: Upload artifacts
-      uses: actions/upload-artifact@v2
-      with:
-        name: native-libs
-        path: libs/
+- name: Upload artifacts
+  uses: actions/upload-artifact@v3
+  with:
+    name: native-libs
+    path: libs/

@@ -24,14 +24,10 @@ jobs:
         cd ${{ github.workspace }}
         /opt/hostedtoolcache/ndk/r21e/x64/ndk-build
         
-    - name: List Build Output
+    - name: Commit and Push
       run: |
-        ls -R libs/
-        
-    - name: Upload Build Artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: native-libraries
-        path: |
-          libs/
-          obj/
+        git config --global user.name 'GitHub Actions'
+        git config --global user.email 'actions@github.com'
+        git add libs/
+        git commit -m "Add compiled native libraries"
+        git push

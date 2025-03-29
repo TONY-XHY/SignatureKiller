@@ -23,9 +23,17 @@ jobs:
         export NDK_PROJECT_PATH=${{ github.workspace }}
         cd ${{ github.workspace }}
         /opt/hostedtoolcache/ndk/r21e/x64/ndk-build
-
-    - name: Upload Artifacts
-      uses: actions/upload-artifact@v2  # 改用 v2 版本
+        
+    - name: List Build Output
+      run: |
+        ls -R libs/
+        
+    - name: Create Artifact Directory
+      run: |
+        mkdir -p artifacts
+        cp -r libs/* artifacts/
+        
+    - uses: actions/upload-artifact@master
       with:
         name: native-libs
-        path: ${{ github.workspace }}/libs/**/*.so
+        path: artifacts

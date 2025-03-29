@@ -13,15 +13,11 @@ jobs:
     
     - name: Setup Android NDK
       uses: nttld/setup-ndk@v1
+      id: setup-ndk
       with:
         ndk-version: r21e
     
     - name: Build Native Library
       run: |
-        export ANDROID_NDK_HOME=${{ github.workspace }}/android-ndk
-        $ANDROID_NDK_HOME/ndk-build
-      
-    - name: Build Native Library
-      run: |
-        export ANDROID_NDK_HOME=${{ github.workspace }}/android-ndk
-        ${{ env.ANDROID_NDK_HOME }}/ndk-build
+        echo "NDK_HOME=${{ steps.setup-ndk.outputs.ndk-path }}"
+        ${{ steps.setup-ndk.outputs.ndk-path }}/ndk-build

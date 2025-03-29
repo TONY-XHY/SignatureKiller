@@ -25,7 +25,7 @@ jobs:
         /opt/hostedtoolcache/ndk/r21e/x64/ndk-build
 
     - name: Upload Artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v2  # 改用 v2 版本
       with:
         name: native-libs
-        path: libs/**/*.so
+        path: ${{ github.workspace }}/libs/**/*.so

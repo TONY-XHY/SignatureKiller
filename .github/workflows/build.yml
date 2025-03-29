@@ -1,0 +1,28 @@
+name: Build Native Library
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Setup Android NDK
+      uses: nttld/setup-ndk@v1
+      with:
+        ndk-version: r21e
+    
+    - name: Build Native Library
+      run: |
+        export ANDROID_NDK_HOME=${{ github.workspace }}/android-ndk
+        $ANDROID_NDK_HOME/ndk-build
+      
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: native-libs
+        path: libs/

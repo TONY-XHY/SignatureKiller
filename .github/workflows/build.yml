@@ -19,5 +19,7 @@ jobs:
     
     - name: Build Native Library
       run: |
-        echo "NDK_HOME=${{ steps.setup-ndk.outputs.ndk-path }}"
-        ${{ steps.setup-ndk.outputs.ndk-path }}/ndk-build
+        echo "NDK_HOME=/opt/hostedtoolcache/ndk/r21e/x64"
+        export NDK_PROJECT_PATH=${{ github.workspace }}
+        cd ${{ github.workspace }}
+        /opt/hostedtoolcache/ndk/r21e/x64/ndk-build
